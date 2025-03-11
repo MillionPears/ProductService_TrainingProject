@@ -1,6 +1,6 @@
 package com.laundry.product.exception;
 
-import com.laundry.order.dto.ErrorResponse;
+import com.laundry.product.dto.ErrorResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

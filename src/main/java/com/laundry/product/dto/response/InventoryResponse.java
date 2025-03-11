@@ -1,6 +1,6 @@
 package com.laundry.product.dto.response;
 
-import com.laundry.order.entity.Product;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

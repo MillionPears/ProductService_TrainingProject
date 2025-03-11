@@ -59,4 +59,10 @@ public class ProductController {
     return ResponseEntity.status(HttpStatus.OK).body(productResponses);
 
   }
+
+  @GetMapping("/list")
+  public ResponseEntity<List<ProductResponse>> getProductsByIds(@RequestParam List<UUID> productIds) {
+    List<ProductResponse> products = productService.getProductsByIds(productIds);
+    return ResponseEntity.ok(products);
+  }
 }

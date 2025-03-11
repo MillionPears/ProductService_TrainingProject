@@ -1,7 +1,8 @@
 package com.laundry.product.mapstruct;
 
-import com.laundry.order.dto.response.InventoryResponse;
-import com.laundry.order.entity.Inventory;
+
+import com.laundry.product.dto.response.InventoryResponse;
+import com.laundry.product.entity.Inventory;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
