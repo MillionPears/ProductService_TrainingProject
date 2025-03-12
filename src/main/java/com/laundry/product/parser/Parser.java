@@ -3,20 +3,25 @@ package com.laundry.product.parser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 @Component
-@Log4j2
 @RequiredArgsConstructor
-public class EventParser {
+public class Parser {
   private final ObjectMapper objectMapper;
 
-  public <T> T parseEvent(String eventJson, Class<T> eventType) {
+  public String parseToJon(Object event) {
+    try {
+      return new ObjectMapper().writeValueAsString(event);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException("Error serializing event to JSON", e);
+    }
+  }
+
+  public <T> T parseToObject(String eventJson, Class<T> eventType) {
     try {
       return objectMapper.readValue(eventJson, eventType);
     } catch (JsonProcessingException e) {
-      log.error("JsonProcessingException while parsing event to {}: {}", eventType.getSimpleName(), e.getMessage());
       throw new RuntimeException("Invalid event data for " + eventType.getSimpleName());
     }
   }

@@ -25,6 +25,7 @@ public class KafkaConsumerConfig {
     configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
     configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
     configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
     configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "order-inventory-group");
     return configProps;
