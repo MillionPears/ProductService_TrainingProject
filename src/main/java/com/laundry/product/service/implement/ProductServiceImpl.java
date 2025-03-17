@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,9 +59,16 @@ public class ProductServiceImpl implements ProductService {
   public Page<ProductResponse> filterProductByNameAndPrice(String name, BigDecimal minPrice, BigDecimal maxPrice, String sortBy, String sortDirection, Pageable pageable) {
     Sort sort =Sort.by(Sort.Direction.fromString(sortDirection),sortBy);
     Pageable pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),sort);
-    Page<Product> productPage = productRepository.filterByNameAndPrice(name, minPrice, maxPrice, pageable);
-    return productPage.map(mapper::toDTO);
+//    Page<Product> productPage = productRepository.filterByNameAndPrice(name, minPrice, maxPrice, pageable);
+//    return productPage.map(mapper::toDTO);
+    return null;
   }
 
 
+  @Override
+  public List<ProductResponse> getProductsByIds(List<UUID> productIds) {
+    List<Product> products = productRepository.findAllById(productIds);
+    return products.stream()
+      .map(mapper::toDTO).toList();
+  }
 }

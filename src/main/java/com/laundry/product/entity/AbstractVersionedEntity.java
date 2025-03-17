@@ -1,6 +1,5 @@
 package com.laundry.product.entity;
 
-import com.laundry.order.entity.Auditor;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
 import lombok.Getter;

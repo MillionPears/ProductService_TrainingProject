@@ -20,6 +20,6 @@ public interface ProductService {
                                                     String sortBy,
                                                     String sortDirection,
                                                     Pageable pageable);
-
+  List<ProductResponse> getProductsByIds(List<UUID> ids);
 
 }

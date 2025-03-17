@@ -14,13 +14,13 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID>, JpaSpecificationExecutor<Product> {
   boolean existsByName(String name);
 
-  @Query(value = "SELECT * FROM products p" +
-    "WHERE (:name ='' OR :name IS NULL OR p.name LIKE %:name% OR p.name IS NULL)" +
-    "AND (:minPrice IS NULL OR p.price >= :minPrice)" +
-    "AND (:maxPrice IS NULL OR p.price <= :maxPrice)",nativeQuery = true)
-  Page<Product> filterByNameAndPrice(@Param("name")String name,
-                                  @Param("minPrice")BigDecimal minPrice,
-                                  @Param("maxPrice") BigDecimal maxPrice,
-                                  Pageable pageable);
+//  @Query(value = "SELECT * FROM products p" +
+//    "WHERE (:name ='' OR :name IS NULL OR p.name LIKE %:name% OR p.name IS NULL)" +
+//    "AND (:minPrice IS NULL OR p.price >= :minPrice)" +
+//    "AND (:maxPrice IS NULL OR p.price <= :maxPrice)",nativeQuery = true)
+//  Page<Product> filterByNameAndPrice(@Param("name")String name,
+//                                  @Param("minPrice")BigDecimal minPrice,
+//                                  @Param("maxPrice") BigDecimal maxPrice,
+//                                  Pageable pageable);
 
 }

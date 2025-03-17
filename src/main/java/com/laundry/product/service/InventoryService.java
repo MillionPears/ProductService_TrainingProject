@@ -1,6 +1,5 @@
 package com.laundry.product.service;
 
-import com.laundry.order.entity.Product;
 
 import java.util.Map;
 import java.util.UUID;
