@@ -4,6 +4,7 @@ import com.laundry.product.dto.ErrorResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,6 +16,17 @@ import java.util.List;
 @RestControllerAdvice
 @Log4j2
 public class GlobalExceptionHandler {
+
+  @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+  public ResponseEntity<ErrorResponse> handleOptimisticLockException(ObjectOptimisticLockingFailureException ex) {
+    ErrorResponse errorResponse =  ErrorResponse.of(
+      String.valueOf(ErrorCode.OPTIMISTIC_LOCK.getCode()),
+      ErrorCode.OPTIMISTIC_LOCK.getStatus(),
+      ErrorCode.OPTIMISTIC_LOCK.formatMessage("Inventory update", ex.getMessage()),
+      null
+    );
+    return new ResponseEntity<>(errorResponse, ErrorCode.OPTIMISTIC_LOCK.getStatus());
+  }
 
   @ExceptionHandler(CustomException.class)
   public ResponseEntity<ErrorResponse> handleCustomException(CustomException ex) {

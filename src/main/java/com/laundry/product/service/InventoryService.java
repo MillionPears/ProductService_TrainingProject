@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public interface InventoryService {
   void createInventory(UUID productId);
-//  void checkInventory(UUID productId, int quantity);
-  void reduceStock(Map<UUID, Integer> productQuantities);
+//  boolean checkInventory(UUID productId, int quantity);
+  void checkInventoryAndReduceStock(Map<UUID, Integer> productQuantities);
+  void compensateInventory(Map<UUID, Integer> productQuantities);
 }

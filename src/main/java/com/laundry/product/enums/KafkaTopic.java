@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum KafkaTopic {
-  INVENTORY_REDUCE_STOCK_EVENT("inventory.update.stock"),
-  INVENTORY_REDUCE_STOCK_STATUS("inventory.update.status");
+  NOTIFY_INVENTORY_COMPENSATION_ACTION("inventory.compensation");
+
   private final String topicName;
 
   KafkaTopic(String topicName) {

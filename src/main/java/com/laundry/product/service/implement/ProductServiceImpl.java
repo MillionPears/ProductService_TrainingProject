@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
   @Transactional
   public ProductResponse createProduct(ProductCreateRequest productCreateRequest) {
     Product product = mapper.toEntity(productCreateRequest);
-    if(productRepository.existsByName(product.getName())) throw new CustomException(ErrorCode.CONFLICT,"Product Name",product.getName());
+    if(productRepository.existsByName(product.getName())) throw new CustomException(ErrorCode.PRODUCT_NAME_ALREADY_EXISTS,product.getName());
     product = productRepository.save(product);
     inventoryService.createInventory(product.getId());
     return mapper.toDTO(product);
@@ -43,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public ProductResponse getProductById(UUID id) {
     Product product = productRepository.findById(id).orElseThrow(
-      ()-> new CustomException(ErrorCode.NOT_FOUND,"Product not found",id)
+      ()-> new CustomException(ErrorCode.PRODUCT_NOT_FOUND,id)
     );
     return mapper.toDTO(product);
   }

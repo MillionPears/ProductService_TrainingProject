@@ -27,17 +27,17 @@ public class KafkaConsumerConfig {
     configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
     configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
     configProps.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-    configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "order-inventory-group");
+    configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "inventory-payment-group");
     return configProps;
   }
 
   @Bean
   public <T> ConsumerFactory<String, T> consumerFactory() {
-    return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(), new JsonDeserializer<>());
   }
 
   @Bean
-  public <T> ConcurrentKafkaListenerContainerFactory<String, T> OrderInventoryListener(ConsumerFactory<String, T> consumerFactory) {
+  public <T> ConcurrentKafkaListenerContainerFactory<String, T> OrderPaymentListener(ConsumerFactory<String, T> consumerFactory) {
     ConcurrentKafkaListenerContainerFactory<String, T> factory = new ConcurrentKafkaListenerContainerFactory<>();
     factory.setConsumerFactory(consumerFactory);
     factory.setConcurrency(3);

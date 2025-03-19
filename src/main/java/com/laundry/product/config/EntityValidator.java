@@ -29,7 +29,7 @@ public class EntityValidator {
         .collect(Collectors.toList());
       log.error("[ENTITY VALIDATOR] - Validation failed for entity {} - Errors: {}",
         entity.getClass().getSimpleName(), errorMessages);
-      throw new CustomException(ErrorCode.INVALID_FIELD, "Validation failed", errorMessages);
+      throw new CustomException(ErrorCode.INVALID_FIELD, errorMessages);
     }
   }
 }
